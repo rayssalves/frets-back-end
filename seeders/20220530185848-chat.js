@@ -1,7 +1,4 @@
 "use strict";
-const bcrypt = require("bcrypt");
-const { stringify } = require("nodemon/lib/utils");
-const { SALT_ROUNDS } = require("../config/constants");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
