@@ -1,19 +1,30 @@
 const express = require("express");
-const socket = require("socket.io");
-
+const cors = require("cors");
+const { createServer } = require("http");
 const ownersRouter = require("./routers/owners");
-const app = express();
-const port = 4000;
 
+const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use("/owners", ownersRouter);
 
-const server = app.listen(port, () =>
-  console.log(`App listening on port ${port}!`)
-);
+const PORT = 4000;
 
-//socket set up
-const io = socket(server);
-io.on("connection", function (socket) {
-  console.log("make socket connection");
+const httpServer = createServer();
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["instant-chat-header"],
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+});
+
+httpServer.listen(PORT, () => {
+  console.log("server is running on ", PORT);
 });
