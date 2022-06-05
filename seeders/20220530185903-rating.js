@@ -7,9 +7,8 @@ module.exports = {
       [
         {
           ownerId: 1,
-          userId: 2,
-          stars: 5,
           userId: 1,
+          stars: 5,
           comment: "Myllo is adorable, I love having him over",
           createdAt: new Date(),
           updatedAt: new Date(),

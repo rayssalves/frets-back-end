@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       owner: DataTypes.BOOLEAN,
+      name: DataTypes.STRING,
+      city: DataTypes.STRING,
+      imageUrl: DataTypes.STRING,
+      description: DataTypes.TEXT,
+      rating: DataTypes.INTEGER,
     },
     {
       sequelize,

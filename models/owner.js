@@ -16,13 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   owner.init(
-    {
-      name: DataTypes.STRING,
-      city: DataTypes.STRING,
-      imageUrl: DataTypes.STRING,
-      description: DataTypes.TEXT,
-      rating: DataTypes.INTEGER,
-    },
+    {},
     {
       sequelize,
       modelName: "owner",
