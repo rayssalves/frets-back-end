@@ -13,6 +13,14 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          ownerId: 2,
+          userId: 3,
+          stars: 4,
+          comment: "Myllo is adorable, I love having him over",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

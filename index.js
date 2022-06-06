@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const authRouter = require("./routers/auth");
+const userRouter = require("./routers/user");
 
 app.use(cors());
 
@@ -11,6 +12,7 @@ const bodyParserMiddleWare = express.json();
 app.use(bodyParserMiddleWare);
 
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 
 const server = http.createServer(app);
 const PORT = 4000;

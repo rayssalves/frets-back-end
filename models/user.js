@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         through: "userChats",
         foreignKey: "userId",
       });
+      user.hasMany(models.rating);
     }
   }
   user.init(
