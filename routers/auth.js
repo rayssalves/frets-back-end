@@ -47,6 +47,7 @@ router.post("/signup", async (req, res) => {
   //available,
   //specie
   // }
+  console.log(req.body);
   const { email, password, name, isOwner, city, imageUrl, description, pet } =
     req.body;
   if (!email || !password || !name) {
@@ -58,12 +59,12 @@ router.post("/signup", async (req, res) => {
       email,
       password: bcrypt.hashSync(password, SALT_ROUNDS),
       name,
-      isOwner,
+      owner: isOwner,
       city,
       imageUrl,
       description,
     });
-
+    console.log("HIT");
     if (isOwner) {
       const newOwner = await Owner.create();
 

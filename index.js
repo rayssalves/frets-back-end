@@ -5,6 +5,7 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const authRouter = require("./routers/auth");
 const userRouter = require("./routers/user");
+const chatRouter = require("./routers/chat");
 
 app.use(cors());
 
@@ -13,6 +14,7 @@ app.use(bodyParserMiddleWare);
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
+app.use("/chat", chatRouter);
 
 const server = http.createServer(app);
 const PORT = 4000;
@@ -29,6 +31,7 @@ io.on("connection", (socket) => {
   console.log(`Made socket connection: ${socket.id}`);
   //ROOM
   socket.on("join_room", (data) => {
+    console.log("JOINED IN ROOM: ", data);
     socket.join(data);
   });
 
@@ -36,6 +39,8 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("receive_message", data);
   });
 });
+
+app.io = io;
 
 server.listen(PORT, () => {
   console.log("SERVER IS RUNNING on", PORT);
