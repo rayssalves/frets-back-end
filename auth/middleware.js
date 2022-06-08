@@ -1,4 +1,8 @@
 const User = require("../models").user;
+const Owner = require("../models").owner;
+const Pets = require("../models").pets;
+const Rating = require("../models").rating;
+const Species = require("../models").species;
 const { toData } = require("./jwt");
 
 async function auth(req, res, next) {
@@ -14,7 +18,12 @@ async function auth(req, res, next) {
 
   try {
     const data = toData(auth[1]);
-    const user = await User.findByPk(data.userId);
+    const user = await User.findByPk(data.userId, {
+      include: [
+        { model: Owner, include: [{ model: Pets, include: [Species] }] },
+        { model: Rating },
+      ],
+    });
     if (!user) {
       return res.status(404).send({ message: "User does not exist" });
     }

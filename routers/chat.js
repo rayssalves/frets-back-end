@@ -33,12 +33,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    console.log(req.query.userId);
     const chats = await Chat.findAll({
       where: {
-        receiver: req.query.userId,
+        receiver: req.user.dataValues["id"],
       },
     });
 
