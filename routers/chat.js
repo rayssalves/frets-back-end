@@ -3,6 +3,7 @@ const Chat = require("../models/").chat;
 const router = new Router();
 const authMiddleware = require("../auth/middleware");
 const { toData } = require("../auth/jwt");
+const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
   const { room, author, receiver, message, time } = req.body;
@@ -21,12 +22,6 @@ router.post("/", async (req, res) => {
       time,
     });
 
-    req.app.io.on("connection", (socket) => {
-      socket.on("send_message", (data) => {
-        socket.to(data.room).emit("receive_message", data);
-      });
-    });
-
     res.status(200).send({ message: "OK" });
   } catch (error) {
     return res.status(400).send({ message: "Something went wrong, sorry" });
@@ -37,8 +32,12 @@ router.get("/", authMiddleware, async (req, res) => {
   try {
     const chats = await Chat.findAll({
       where: {
-        receiver: req.user.dataValues["id"],
+        [Op.or]: [
+          { receiver: req.user.dataValues["id"] },
+          { author: req.user.dataValues["id"] },
+        ],
       },
+      order: [["createdAt", "ASC"]],
     });
 
     res.status(200).send(chats);

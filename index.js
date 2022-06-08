@@ -40,8 +40,6 @@ io.on("connection", (socket) => {
   });
 });
 
-app.io = io;
-
 server.listen(PORT, () => {
   console.log("SERVER IS RUNNING on", PORT);
 });
