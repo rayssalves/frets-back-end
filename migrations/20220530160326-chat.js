@@ -11,11 +11,17 @@ module.exports = {
       room: {
         type: Sequelize.STRING,
       },
-      author: {
+      authorId: {
         type: Sequelize.INTEGER,
       },
-      receiver: {
+      authorName: {
+        type: Sequelize.STRING,
+      },
+      receiverId: {
         type: Sequelize.INTEGER,
+      },
+      receiverName: {
+        type: Sequelize.STRING,
       },
       message: {
         type: Sequelize.TEXT,

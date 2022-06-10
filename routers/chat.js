@@ -6,8 +6,16 @@ const { toData } = require("../auth/jwt");
 const { Op } = require("sequelize");
 
 router.post("/", async (req, res) => {
-  const { room, author, receiver, message, time } = req.body;
-  if (!room || !author || !receiver || !message) {
+  const {
+    room,
+    authorId,
+    authorName,
+    receiverId,
+    receiverName,
+    message,
+    time,
+  } = req.body;
+  if (!room || !authorId || !receiverId || !message) {
     return res
       .status(400)
       .send("Please provide an room, author, receiver and a message");
@@ -16,8 +24,10 @@ router.post("/", async (req, res) => {
   try {
     const newChat = await Chat.create({
       room,
-      author,
-      receiver,
+      authorId,
+      authorName,
+      receiverId,
+      receiverName,
       message,
       time,
     });
@@ -33,8 +43,8 @@ router.get("/", authMiddleware, async (req, res) => {
     const chats = await Chat.findAll({
       where: {
         [Op.or]: [
-          { receiver: req.user.dataValues["id"] },
-          { author: req.user.dataValues["id"] },
+          { receiverId: req.user.dataValues["id"] },
+          { authorId: req.user.dataValues["id"] },
         ],
       },
       order: [["createdAt", "ASC"]],

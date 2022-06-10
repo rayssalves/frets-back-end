@@ -17,8 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   chat.init(
     {
       room: DataTypes.STRING,
-      author: DataTypes.INTEGER,
-      receiver: DataTypes.INTEGER,
+      authorId: DataTypes.INTEGER,
+      authorName: DataTypes.STRING,
+      receiverId: DataTypes.INTEGER,
+      receiverName: DataTypes.STRING,
       message: DataTypes.TEXT,
       time: DataTypes.STRING,
     },
