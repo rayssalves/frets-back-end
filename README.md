@@ -10,3 +10,14 @@
   <img alt="PostgreSQL" src="https://img.shields.io/badge/-PostgreSQL-%2320232a.svg?style=for-the-badge&logo=postgreSQL&logoColor=blue"/>
   <img alt="Sequelize" src="https://img.shields.io/badge/-Sequelize-%2320232a.svg?style=for-the-badge&logo=sequelize&logoColor=blue"/>
  </p>
+ 
+<h1>Database relations diagram</h1>
+
+- Chat belongs to many user
+- owner has many pets
+- owner belongs to many user
+- pets belongs to owner “OwnerId”
+- pets belongs to species “ SpeciesId”
+- ratings belongs to many user
+- species has many pets
+
