@@ -21,3 +21,4 @@
 - ratings belongs to many user
 - species has many pets
 
+<img src="https://user-images.githubusercontent.com/68439707/178280190-738958e5-4b49-4cf8-b80d-a011e9945478.png"/>
